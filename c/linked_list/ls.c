@@ -63,6 +63,20 @@ void delete(int data){
     return;
 }
 
+struct Node *find(int data){
+
+    if(!HEAD) return NULL;
+    if(HEAD->data == data) return HEAD;
+    struct Node *tmp = HEAD->next;
+    while(tmp->next){
+        if(tmp->data == data) return tmp;
+        tmp = tmp->next;
+    }
+    if(tmp->data == data) return tmp;
+    return NULL;
+
+}
+
 void show(){
     struct Node *tmp = HEAD;
     if(!tmp) return;    
@@ -84,7 +98,8 @@ int main(){
     add(2);
     show(); 
     delete(2);
-    show(); 
+    show();
+    printf("find 99 : %d \n", find(99)->data); 
     return 0;
 
 }

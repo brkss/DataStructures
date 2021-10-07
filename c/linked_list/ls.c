@@ -31,6 +31,38 @@ void add(int data){
     }
 }
 
+void delete(int data){
+    
+    if(!HEAD) return;
+    struct Node *tmp = HEAD;
+    struct Node *prv = NULL;
+    // check if the head have the target value !
+    if(tmp->data == data){
+        HEAD = tmp->next;
+        free(tmp);
+        return;        
+    }
+    // check if next node doesnt exist !
+    if(!tmp->next) return;
+    prv = tmp;
+    tmp = tmp->next;
+    while(tmp->next){
+        if(tmp->data == data){
+            prv->next = tmp->next;
+            free(tmp);
+            return;
+        }
+        prv = tmp;
+        tmp = tmp->next;
+    }
+    // check if last node have the target value;
+    if(tmp->data == data){
+        prv->next = NULL;
+        free(tmp);
+    }
+    return;
+}
+
 void show(){
     struct Node *tmp = HEAD;
     if(!tmp) return;    
@@ -50,6 +82,8 @@ int main(){
     add(-2);
     add(4);
     add(2);
+    show(); 
+    delete(2);
     show(); 
     return 0;
 
